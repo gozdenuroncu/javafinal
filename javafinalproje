@@ -1,0 +1,97 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Elbise {
+    private String marka;
+    private String model;
+    private String beden;
+
+    public Elbise(String marka, String model, String beden) {
+        this.marka = marka;
+        this.model = model;
+        this.beden = beden;
+    }
+
+    public String getMarka() {
+        return marka;
+    }
+
+    public void setMarka(String marka) {
+        this.marka = marka;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getBeden() {
+        return beden;
+    }
+
+    public void setBeden(String beden) {
+        this.beden = beden;
+    }
+
+    // toString metodu
+    @Override
+    public String toString() {
+        return marka + " " + model + " - Beden: " + beden;
+    }
+}
+class Dolap {
+    private ArrayList<Elbise> elbiseler = new ArrayList<>();
+
+    public void elbiseEkle(Elbise elbise) {
+        elbiseler.add(elbise);
+        System.out.println(elbise.getMarka() + " " + elbise.getModel() + " dolaba eklendi.");
+    }
+
+  //tümünü listele
+    public void elbiseleriListele() {
+        System.out.println("Dolaptaki Elbiseler:");
+        for (Elbise elbise : elbiseler) {
+            System.out.println(elbise);
+        }
+    }
+}
+
+// Ana sınıf
+public class ElbiseUygulamasi {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Dolap dolap = new Dolap();
+
+        while (true) {
+            System.out.println("\n1. Yeni Elbise Ekle");
+            System.out.println("2. Dolaptaki Elbiseleri Listele");
+            System.out.println("3. Çık");
+            System.out.print("Seçiminiz: ");
+            int secim = scanner.nextInt();
+
+            switch (secim) {
+                case 1:
+                    System.out.print("Elbise Markası: ");
+                    String marka = scanner.next();
+                    System.out.print("Elbise Modeli: ");
+                    String model = scanner.next();
+                    System.out.print("Elbise Bedeni: ");
+                    String beden = scanner.next();
+                    Elbise yeniElbise = new Elbise(marka, model, beden);
+                    dolap.elbiseEkle(yeniElbise);
+                    break;
+                case 2:
+                    dolap.elbiseleriListele();
+                    break;
+                case 3:
+                    System.out.println("Programdan kapatılıyor..");
+                    System.exit(0);
+                default:
+                    System.out.println("Geçersiz işlem. Tekrar deneyin.");
+            }
+        }
+    }
+}
